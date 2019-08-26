@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.gahee.movieposters.model.PopularResponse;
+import com.gahee.movieposters.model.TrailerResponse;
 
 public class RemoteViewModel extends ViewModel {
 
@@ -17,8 +18,13 @@ public class RemoteViewModel extends ViewModel {
         return remoteRepo.getPopularMovieResponseLiveDataFromClient();
     }
 
+    public MutableLiveData<TrailerResponse> getTrailerLiveDataFromRepo(){
+        return remoteRepo.getTrailerLiveDataFromClient();
+    }
+
     public void fetchPopularMoviesFromRepo(){
         remoteRepo.fetchPopularMoviesAsync();
     }
 
+    public void fetchTrailersFromRepo(String movieId){remoteRepo.fetchTrailersAsync(movieId);}
 }

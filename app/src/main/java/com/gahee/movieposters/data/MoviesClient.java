@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.gahee.movieposters.model.PopularMovie;
 import com.gahee.movieposters.model.PopularResponse;
+import com.gahee.movieposters.model.TrailerResponse;
 import com.gahee.movieposters.utils.Config;
 
 import java.util.HashMap;
@@ -29,6 +30,7 @@ public class MoviesClient {
     private static final String TAG = "MoviesClient";
 
     private MutableLiveData<PopularResponse> popularMovieResponseLiveData = new MutableLiveData<>();
+    private MutableLiveData<TrailerResponse> trailerResponseLiveData = new MutableLiveData<>();
 
     private HashMap<String, String> queries = new HashMap<>();
     private static MoviesClient instance;
@@ -53,11 +55,6 @@ public class MoviesClient {
                 = new Callback<PopularResponse>() {
             @Override
             public void onResponse(Call<PopularResponse> call, Response<PopularResponse> response) {
-//                Log.d(RETROFIT_DEBUG, "on response : " + response.body().getResults());
-//
-//                for(PopularMovie popularMovie : response.body().getResults()){
-//                    Log.d(RETROFIT_DEBUG, "title : " + popularMovie.getTitle());
-//                }
                 popularMovieResponseLiveData.setValue(response.body());
             }
 
@@ -73,12 +70,35 @@ public class MoviesClient {
         return popularMovieResponseLiveData;
     }
 
+    public MutableLiveData<TrailerResponse> getTrailerResponseLiveData() {
+        return trailerResponseLiveData;
+    }
+
     private HashMap<String, String> appendQueries(){
         queries.put(KEY_LANGUAGE, EN);
         queries.put(KEY_SORT_BY, POPULARITY);
         queries.put(KEY_PAGE, PAGE);
         return queries;
     }
+
+    public void fetchMovieTrailers(String movieId){
+        final Call<TrailerResponse> trailerResponseCall
+                = moviesService.listTrailers(movieId, Config.API_KEY, EN);
+        Callback<TrailerResponse> callback
+                = new Callback<TrailerResponse>() {
+            @Override
+            public void onResponse(Call<TrailerResponse> call, Response<TrailerResponse> response) {
+                trailerResponseLiveData.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<TrailerResponse> call, Throwable t) {
+                Log.d(RETROFIT_DEBUG, "trailers failure : " + t.getMessage());
+            }
+        };
+        trailerResponseCall.enqueue(callback);
+    }
+
 
 
 }

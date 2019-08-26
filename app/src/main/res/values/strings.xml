@@ -5,6 +5,6 @@
     <string name="sample_medium">Margins are the space between content and the left and right edges of the screen. Margin widths are defined as fixed values at each breakpoint... Margins are the space between content and the left and right edges of the screen. Margin widths are defined as fixed values at each breakpoint range.</string>
 
     <!-- Main View Holder TextViews-->
-    <string name="checkout_details">Check out details</string>
+    <string name="checkout_details">Check out the details</string>
 
 </resources>
