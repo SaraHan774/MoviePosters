@@ -1,7 +1,8 @@
 package com.gahee.movieposters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,18 +11,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.Transformation;
-import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.gahee.movieposters.model.PopularMovie;
-import com.gahee.movieposters.utils.Constants;
 
-import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.gahee.movieposters.utils.Constants.MAIN_MOVIE_POSTER_CORNER_RADIUS;
+import static com.gahee.movieposters.utils.Constants.PARCEL_KEY;
+import static com.gahee.movieposters.utils.Constants.POSTER_BASE_URL;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
@@ -42,7 +44,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
-        PopularMovie popularMovie = popularMovies.get(position);
+        final PopularMovie popularMovie = popularMovies.get(position);
         String title = popularMovie.getTitle();
         String releaseDate = popularMovie.getReleaseDate();
         float voteAverage = popularMovie.getVoteAverage();
@@ -57,11 +59,20 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         holder.tvMovieOverView.setText(overView);
 
         Glide.with(context)
-                .load(Constants.POSTER_BASE_URL + posterPath)
-                .transform(new RoundedCorners(20))
+                .load(POSTER_BASE_URL + posterPath)
+                .transform(new RoundedCorners(MAIN_MOVIE_POSTER_CORNER_RADIUS))
                 .placeholder(R.drawable.scrim_gradient_updown)
                 .error(R.drawable.ic_launcher_background)
                 .into(holder.imageViewPoster);
+
+        holder.checkoutDetailBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra(PARCEL_KEY, popularMovie);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -71,7 +82,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     class MovieViewHolder extends RecyclerView.ViewHolder{
         ImageView imageViewPoster;
-        ImageButton imageButtonDetail;
+        ConstraintLayout checkoutDetailBox;
         TextView tvMovieTitle;
         TextView tvMovieReleaseDate;
         TextView tvMovieVoteAverage;
@@ -81,7 +92,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
             imageViewPoster = itemView.findViewById(R.id.main_poster_imageview);
-            imageButtonDetail = itemView.findViewById(R.id.main_card_bottom_click_imagebtn);
+            checkoutDetailBox = itemView.findViewById(R.id.checkout_detail_box);
             tvMovieTitle = itemView.findViewById(R.id.main_movie_title);
             tvMovieReleaseDate = itemView.findViewById(R.id.main_movie_release_date);
             tvMovieVoteAverage = itemView.findViewById(R.id.main_movie_vote_average);

@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.gahee.movieposters.data.RemoteViewModel;
 import com.gahee.movieposters.model.PopularResponse;
@@ -53,5 +54,9 @@ public class MainActivity extends AppCompatActivity {
                 recyclerView.setHasFixedSize(true);
             }
         });
+    }
+
+    public void onDetailClick(View view) {
+
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/round_corner_rect"
     android:elevation="8dp"
     android:layout_margin="16dp"
@@ -47,7 +48,7 @@
 
         <TextView
             android:id="@+id/main_movie_vote_average"
-            android:fontFamily="@font/raleway_regular"
+            android:fontFamily="@font/raleway_semibold"
             android:textSize="@dimen/text_size_medium"
             android:layout_marginBottom="@dimen/main_movie_text_margin_2x"
             android:text="7.8"
@@ -70,24 +71,36 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/main_card_bottom_click_textview"
-        android:text="@string/checkout_details"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/checkout_detail_box"
         android:layout_below="@id/main_poster_imageview"
-        android:textAlignment="center"
-        android:textSize="@dimen/text_size_small"
-        android:fontFamily="@font/raleway_light"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
 
-    <ImageButton
-        android:id="@+id/main_card_bottom_click_imagebtn"
-        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
-        android:layout_below="@id/main_poster_imageview"
-        android:layout_alignEnd="@id/main_card_bottom_click_textview"
-        android:background="@color/transparent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/main_card_bottom_click_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_light"
+            android:text="@string/checkout_details"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_size_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageButton
+            android:id="@+id/main_card_bottom_click_imagebtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

@@ -12,4 +12,9 @@ public class Constants {
     public static final String KEY_PAGE = "page";
     public static final String PAGE = "1";
 
+    //movie poster
+    public static final int MAIN_MOVIE_POSTER_CORNER_RADIUS = 20;
+
+    //intent
+    public static final String PARCEL_KEY = "clickedMovie";
 }
