@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/movieWhite"
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -12,27 +13,23 @@
         android:background="@color/movieGreen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="4dp"
         >
 
         <TextView
             android:id="@+id/main_toolbar_title_textview"
             android:text="@string/app_name"
-            android:textSize="32dp"
-            android:paddingEnd="4dp"
-            android:paddingStart="4dp"
+            android:textColor="@color/movieBlack"
+            android:textSize="@dimen/text_size_large"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
             android:fontFamily="@font/bangers_regular"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
     </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+
 
 </LinearLayout>

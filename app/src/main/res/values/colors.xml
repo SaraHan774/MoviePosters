@@ -6,4 +6,5 @@
 
     <color name="movieGreen">#00E968</color>
     <color name="movieBlack">#0D0F0F</color>
+    <color name="movieWhite">#FFFFFF</color>
 </resources>
