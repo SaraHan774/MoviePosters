@@ -29,7 +29,7 @@ public class LikedMovie {
     private final float voteAverage;
 
     @ColumnInfo(name = "comment")
-    private final String comment;
+    private String comment;
 
     public LikedMovie(int movieId, @NonNull String title, String overview, String posterPath, String releaseDate, float voteAverage) {
         this.movieId = movieId;
@@ -67,5 +67,11 @@ public class LikedMovie {
         return voteAverage;
     }
 
+    public String getComment() {
+        return comment;
+    }
 
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 }

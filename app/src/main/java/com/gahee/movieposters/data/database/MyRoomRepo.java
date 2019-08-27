@@ -3,8 +3,11 @@ package com.gahee.movieposters.data.database;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
+
+import com.gahee.movieposters.DetailActivity;
 
 import java.util.HashMap;
 import java.util.List;
@@ -96,9 +99,14 @@ public class MyRoomRepo {
             int movieId = (int) key[0];
             Object[] value = maps[0].values().toArray();
             String comment = (String) value[0];
-
+            Log.d(TAG, "doInBackground ...  key :" + movieId + " value : " + value);
             daos.updateCommentByMovieId(movieId, comment);
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            Log.d(TAG, "onPostExecute: updated comment");
         }
     }
 

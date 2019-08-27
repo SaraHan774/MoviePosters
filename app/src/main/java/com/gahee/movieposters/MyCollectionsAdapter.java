@@ -45,6 +45,7 @@ public class MyCollectionsAdapter extends RecyclerView.Adapter<MyCollectionsAdap
         holder.title.setText(likedMovie.getTitle());
         holder.releaseDate.setText(likedMovie.getReleaseDate());
         holder.voteAverage.setText(String.valueOf(likedMovie.getVoteAverage()));
+        holder.comment.setText(likedMovie.getComment());
 
         Glide.with(context).load(POSTER_BASE_URL + likedMovie.getPosterPath())
                 .transform(new RoundedCorners(10))
@@ -65,6 +66,7 @@ public class MyCollectionsAdapter extends RecyclerView.Adapter<MyCollectionsAdap
         private TextView title;
         private TextView releaseDate;
         private TextView voteAverage;
+        private TextView comment;
         private ImageButton trashButton;
 
         public MyCollectionsViewHolder(@NonNull View itemView) {
@@ -74,7 +76,7 @@ public class MyCollectionsAdapter extends RecyclerView.Adapter<MyCollectionsAdap
             releaseDate = itemView.findViewById(R.id.collections_releasedate_textview);
             voteAverage = itemView.findViewById(R.id.collections_voteaverage_textview);
             trashButton = itemView.findViewById(R.id.delete_from_collections_imagebtn);
-
+            comment = itemView.findViewById(R.id.collections_myreview_textview);
         }
 
         @Override

@@ -1,16 +1,20 @@
 package com.gahee.movieposters;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -41,6 +45,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private ImageButton likeButton;
     private ImageButton addCommentButton;
+    private EditText commentEditText;
     private boolean isLiked = false;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -54,6 +59,7 @@ public class DetailActivity extends AppCompatActivity {
 
         likeButton = findViewById(R.id.detail_like_imagebtn);
         addCommentButton = findViewById(R.id.detail_myreview_imagebtn);
+        commentEditText = new EditText(this);
 
         myRoomViewModel = ViewModelProviders.of(this).get(MyRoomViewModel.class);
         myRoomViewModel.getLikeMoviesLiveDataFromRepo().observe(this, likedMovies -> {
@@ -131,7 +137,11 @@ public class DetailActivity extends AppCompatActivity {
         });
 
         addCommentButton.setOnClickListener(view -> {
-
+            if(!isLiked){
+                Toast.makeText(this, getString(R.string.save_first), Toast.LENGTH_SHORT).show();
+            }else{
+                showAddCommentDialog(this);
+            }
         });
 
         ImageButton shareButton = findViewById(R.id.detail_share_imagebtn);
@@ -184,5 +194,22 @@ public class DetailActivity extends AppCompatActivity {
         }
         Log.d(TAG, "checkIfLikedMovie: " + popularMovie.getMovieId() + " not in the database");
         return false;
+    }
+
+    private void showAddCommentDialog(Context context) {
+        AlertDialog dialog = new AlertDialog.Builder(context)
+                .setTitle(getString(R.string.write_comment_title))
+                .setMessage(getString(R.string.comment_message))
+                .setView(commentEditText)
+                .setPositiveButton(getString(R.string.add_comment_btn_text), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String comment = commentEditText.getText().toString();
+                        myRoomViewModel.updateCommentByMovieIdViaViewModel(popularMovie.getMovieId(), comment);
+                    }
+                })
+                .setNegativeButton(getString(android.R.string.cancel), null)
+                .create();
+        dialog.show();
     }
 }

@@ -44,6 +44,12 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <include
+        layout="@layout/my_collections_empty"
+        android:id="@+id/my_collections_empty_container"
+        android:visibility="gone"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_collections_recyclerview"
         android:layout_width="match_parent"
