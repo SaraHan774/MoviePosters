@@ -21,5 +21,7 @@
     <string name="write_comment_title">WRITE YOUR COMMENT</string>
     <string name="comment_message">How was this movie?</string>
     <string name="add_comment_btn_text">Add</string>
+    <string name="canceled">Canceled</string>
+    <string name="saved_comment">Successfully saved your comment</string>
 
 </resources>

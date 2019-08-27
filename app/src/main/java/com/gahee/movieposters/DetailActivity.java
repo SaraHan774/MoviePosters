@@ -14,6 +14,9 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -28,6 +31,7 @@ import com.gahee.movieposters.data.database.MyRoomViewModel;
 import com.gahee.movieposters.data.remote.RemoteViewModel;
 import com.gahee.movieposters.model.PopularMovie;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -130,17 +134,19 @@ public class DetailActivity extends AppCompatActivity {
 
         likeButton.setOnClickListener(view -> {
             if(!isLiked){
-                insertMovieOnClick(popularMovie);
+                insertMovieOnClick(popularMovie, view);
             }else {
-                deleteMovieOnClick(popularMovie.getMovieId());
+                deleteMovieOnClick(popularMovie.getMovieId(), view);
             }
         });
 
         addCommentButton.setOnClickListener(view -> {
             if(!isLiked){
-                Toast.makeText(this, getString(R.string.save_first), Toast.LENGTH_SHORT).show();
+                Toast toast = Toast.makeText(this, getString(R.string.save_first), Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
             }else{
-                showAddCommentDialog(this);
+                showAddCommentDialog(this, view);
             }
         });
 
@@ -158,7 +164,7 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    private void insertMovieOnClick(PopularMovie popularMovie){
+    private void insertMovieOnClick(PopularMovie popularMovie, View view){
         LikedMovie likedMovie = new LikedMovie(
                 popularMovie.getMovieId(),
                 popularMovie.getTitle(),
@@ -170,14 +176,14 @@ public class DetailActivity extends AppCompatActivity {
         myRoomViewModel.insertLikedMovieViaViewModel(likedMovie);
 
         likeButton.setImageDrawable(getDrawable(R.drawable.ic_thumb_up_white_48dp));
-        Toast.makeText(this, getString(R.string.saved_to_db), Toast.LENGTH_SHORT).show();
+        Snackbar.make(view, getString(R.string.saved_to_db), Snackbar.LENGTH_LONG).show();
     }
 
-    private void deleteMovieOnClick(int movieId){
+    private void deleteMovieOnClick(int movieId, View view){
         myRoomViewModel.deleteLikedMovieByIdViaViewModel(movieId);
 
         likeButton.setImageDrawable(getDrawable(R.drawable.ic_thumb_up_outlined_48dp));
-        Toast.makeText(this, getString(R.string.removed_from_db), Toast.LENGTH_SHORT).show();
+        Snackbar.make(view, getString(R.string.removed_from_db), Snackbar.LENGTH_LONG).show();
     }
 
     private boolean checkIfLikedMovie(PopularMovie popularMovie, List<LikedMovie> likedMovieList) {
@@ -196,7 +202,11 @@ public class DetailActivity extends AppCompatActivity {
         return false;
     }
 
-    private void showAddCommentDialog(Context context) {
+
+    private void showAddCommentDialog(Context context, View view) {
+        if(commentEditText.getParent() != null){
+            ((ViewGroup)commentEditText.getParent()).removeView(commentEditText);
+        }
         AlertDialog dialog = new AlertDialog.Builder(context)
                 .setTitle(getString(R.string.write_comment_title))
                 .setMessage(getString(R.string.comment_message))
@@ -206,10 +216,24 @@ public class DetailActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         String comment = commentEditText.getText().toString();
                         myRoomViewModel.updateCommentByMovieIdViaViewModel(popularMovie.getMovieId(), comment);
+                        Snackbar snackbar = Snackbar.make(view, getString(R.string.saved_comment), Snackbar.LENGTH_SHORT);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                            snackbar.setBackgroundTint(getColor(R.color.movieGreen));
+                            snackbar.setTextColor(getColor(R.color.colorBlack));
+                        }
+                        snackbar.show();
                     }
                 })
-                .setNegativeButton(getString(android.R.string.cancel), null)
+                .setNegativeButton(getString(android.R.string.cancel), (dialogInterface, i) -> {
+                    Snackbar snackbar = Snackbar.make(view, getString(R.string.canceled), Snackbar.LENGTH_SHORT);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        snackbar.setBackgroundTint(getColor(R.color.movieAccent));
+                        snackbar.setTextColor(getColor(R.color.colorBlack));
+                    }
+                    snackbar.show();
+                })
                 .create();
+
         dialog.show();
     }
 }
