@@ -10,5 +10,6 @@
     <string name="click_to_watch">Click to watch</string>
     <string name="removed_from_db">Removed from your collections!</string>
     <string name="saved_to_db">Saved to your collections!</string>
+    <string name="my_collections">My Collections</string>
 
 </resources>
