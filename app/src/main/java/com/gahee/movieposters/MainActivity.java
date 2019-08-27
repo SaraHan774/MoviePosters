@@ -1,5 +1,6 @@
 package com.gahee.movieposters;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
@@ -12,8 +13,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 
 import com.gahee.movieposters.data.remote.RemoteViewModel;
+
+import static com.gahee.movieposters.utils.Constants.TO_COLLECTIONS_PARCEL_KEY;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +44,17 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.main_toolbar);
         toolbar.inflateMenu(R.menu.main_menu);
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if(item.getItemId() == R.id.my_collections){
+                    Intent intent = new Intent(MainActivity.this, MyCollectionsActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+                return false;
+            }
+        });
 
         recyclerView = findViewById(R.id.popular_movies_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -59,5 +75,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.my_collections){
+
+            return true;
+        }
+        return false;
     }
 }

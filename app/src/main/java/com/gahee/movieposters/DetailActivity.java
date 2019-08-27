@@ -40,6 +40,7 @@ public class DetailActivity extends AppCompatActivity {
     private MyRoomViewModel myRoomViewModel;
 
     private ImageButton likeButton;
+    private ImageButton addCommentButton;
     private boolean isLiked = false;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -52,6 +53,7 @@ public class DetailActivity extends AppCompatActivity {
         popularMovie  = intent.getParcelableExtra(PARCEL_KEY);
 
         likeButton = findViewById(R.id.detail_like_imagebtn);
+        addCommentButton = findViewById(R.id.detail_myreview_imagebtn);
 
         myRoomViewModel = ViewModelProviders.of(this).get(MyRoomViewModel.class);
         myRoomViewModel.getLikeMoviesLiveDataFromRepo().observe(this, likedMovies -> {
@@ -123,13 +125,14 @@ public class DetailActivity extends AppCompatActivity {
         likeButton.setOnClickListener(view -> {
             if(!isLiked){
                 insertMovieOnClick(popularMovie);
-                //make it filled icon if it is in the database
             }else {
                 deleteMovieOnClick(popularMovie.getMovieId());
-
             }
         });
 
+        addCommentButton.setOnClickListener(view -> {
+
+        });
 
         ImageButton shareButton = findViewById(R.id.detail_share_imagebtn);
         shareButton.setOnClickListener(view -> {

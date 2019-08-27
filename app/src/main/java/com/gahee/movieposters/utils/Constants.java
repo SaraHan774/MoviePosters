@@ -16,5 +16,6 @@ public class Constants {
     public static final int MAIN_MOVIE_POSTER_CORNER_RADIUS = 20;
 
     //intent
-    public static final String PARCEL_KEY = "clickedMovie";
+    public static final String PARCEL_KEY = "clickedMovieParcelKey";
+    public static final String TO_COLLECTIONS_PARCEL_KEY = "toCollectionsParcelKey";
 }

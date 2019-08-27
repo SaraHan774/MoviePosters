@@ -28,6 +28,9 @@ public class LikedMovie {
     @ColumnInfo(name = "voteAverage")
     private final float voteAverage;
 
+    @ColumnInfo(name = "comment")
+    private final String comment;
+
     public LikedMovie(int movieId, @NonNull String title, String overview, String posterPath, String releaseDate, float voteAverage) {
         this.movieId = movieId;
         this.title = title;
@@ -35,7 +38,9 @@ public class LikedMovie {
         this.posterPath = posterPath;
         this.releaseDate = releaseDate;
         this.voteAverage = voteAverage;
+        this.comment = "";
     }
+
 
     public int getMovieId() {
         return movieId;
@@ -61,4 +66,6 @@ public class LikedMovie {
     public float getVoteAverage() {
         return voteAverage;
     }
+
+
 }

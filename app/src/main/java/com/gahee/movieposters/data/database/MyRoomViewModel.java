@@ -32,6 +32,10 @@ public class MyRoomViewModel extends AndroidViewModel {
         myRoomRepo.deleteLikedMovieById(movieId);
     }
 
+    public void updateCommentByMovieIdViaViewModel(int movieId, String comment){
+        myRoomRepo.updateCommentByMovieId(movieId, comment);
+    }
+
     @NonNull
     @Override
     public <T extends Application> T getApplication() {

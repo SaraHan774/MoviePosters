@@ -6,7 +6,9 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 public class MyRoomRepo {
@@ -35,6 +37,12 @@ public class MyRoomRepo {
     public void insertLikedMovie(LikedMovie likedMovie){
         Log.d(TAG, "insertLikedMovie: " + likedMovie.getTitle());
         new InsertLikedMovieAsync(daos).execute(likedMovie);
+    }
+
+    public void updateCommentByMovieId(int movieId, String comment){
+        Map<Integer, String> commentMap = new HashMap<>();
+        commentMap.put(movieId, comment);
+        new UpdateCommentAsync(daos).execute(commentMap);
     }
 
     public void deleteLikedMovieById(int movieId){
@@ -68,6 +76,28 @@ public class MyRoomRepo {
         protected Void doInBackground(Integer... integers) {
             Log.d(TAG, "doInBackground: deleting from the database...");
             daos.deleteByMovieId(integers[0]);
+            return null;
+        }
+    }
+
+    public static class UpdateCommentAsync extends AsyncTask<Map<Integer, String>, Void, Void>{
+
+        private final MyRoomDaos daos;
+
+        UpdateCommentAsync(MyRoomDaos daos){
+            this.daos = daos;
+        }
+
+        @Override
+        protected Void doInBackground(Map<Integer, String> ... maps) {
+            Log.d(TAG, "doInBackground: updating comment to the database...");
+
+            Object [] key = maps[0].keySet().toArray();
+            int movieId = (int) key[0];
+            Object[] value = maps[0].values().toArray();
+            String comment = (String) value[0];
+
+            daos.updateCommentByMovieId(movieId, comment);
             return null;
         }
     }

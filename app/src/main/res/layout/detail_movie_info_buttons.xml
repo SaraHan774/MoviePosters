@@ -14,13 +14,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-<!--    <ImageButton-->
-<!--        android:id="@+id/detail_dislike_imagebtn"-->
-<!--        android:src="@drawable/ic_thumb_down_outlined_48dp"-->
-<!--        android:layout_weight="1"-->
-<!--        android:background="@color/transparent"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"/>-->
+    <ImageButton
+        android:id="@+id/detail_myreview_imagebtn"
+        android:src="@drawable/ic_add_comment_white_48dp"
+        android:layout_weight="1"
+        android:background="@color/transparent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <ImageButton
         android:id="@+id/detail_share_imagebtn"
