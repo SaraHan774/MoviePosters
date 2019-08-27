@@ -215,13 +215,19 @@ public class DetailActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String comment = commentEditText.getText().toString();
-                        myRoomViewModel.updateCommentByMovieIdViaViewModel(popularMovie.getMovieId(), comment);
-                        Snackbar snackbar = Snackbar.make(view, getString(R.string.saved_comment), Snackbar.LENGTH_SHORT);
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            snackbar.setBackgroundTint(getColor(R.color.movieGreen));
-                            snackbar.setTextColor(getColor(R.color.colorBlack));
+                        if(!comment.equals("")) {
+                            myRoomViewModel.updateCommentByMovieIdViaViewModel(popularMovie.getMovieId(), comment);
+                            Snackbar snackbar = Snackbar.make(view, getString(R.string.saved_comment), Snackbar.LENGTH_SHORT);
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                snackbar.setBackgroundTint(getColor(R.color.movieGreen));
+                                snackbar.setTextColor(getColor(R.color.colorBlack));
+                            }
+                            snackbar.show();
+                        }else{
+                            Toast toast = Toast.makeText(DetailActivity.this, getString(R.string.blank_comment), Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
                         }
-                        snackbar.show();
                     }
                 })
                 .setNegativeButton(getString(android.R.string.cancel), (dialogInterface, i) -> {

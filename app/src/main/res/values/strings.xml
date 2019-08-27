@@ -23,5 +23,6 @@
     <string name="add_comment_btn_text">Add</string>
     <string name="canceled">Canceled</string>
     <string name="saved_comment">Successfully saved your comment</string>
+    <string name="blank_comment">Blank Comment!</string>
 
 </resources>
