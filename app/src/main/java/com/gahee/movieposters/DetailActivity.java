@@ -1,12 +1,8 @@
 package com.gahee.movieposters;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
@@ -27,7 +23,6 @@ import com.gahee.movieposters.data.database.LikedMovie;
 import com.gahee.movieposters.data.database.MyRoomViewModel;
 import com.gahee.movieposters.data.remote.RemoteViewModel;
 import com.gahee.movieposters.model.PopularMovie;
-import com.gahee.movieposters.model.TrailerResponse;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.util.List;
@@ -144,9 +139,9 @@ public class DetailActivity extends AppCompatActivity {
 
     private void setUpLikedButtonStatus(){
         if(isLiked){
-            likeButton.setImageDrawable(getDrawable(R.drawable.ic_thumb_up_black_48dp));
+            likeButton.setImageDrawable(getDrawable(R.drawable.ic_thumb_up_white_48dp));
         }else{
-            likeButton.setImageDrawable(getDrawable(R.drawable.ic_thumb_up_outlined));
+            likeButton.setImageDrawable(getDrawable(R.drawable.ic_thumb_up_outlined_48dp));
         }
     }
 
@@ -161,14 +156,14 @@ public class DetailActivity extends AppCompatActivity {
         );
         myRoomViewModel.insertLikedMovieViaViewModel(likedMovie);
 
-        likeButton.setImageDrawable(getDrawable(R.drawable.ic_thumb_up_black_48dp));
+        likeButton.setImageDrawable(getDrawable(R.drawable.ic_thumb_up_white_48dp));
         Toast.makeText(this, getString(R.string.saved_to_db), Toast.LENGTH_SHORT).show();
     }
 
     private void deleteMovieOnClick(int movieId){
         myRoomViewModel.deleteLikedMovieByIdViaViewModel(movieId);
 
-        likeButton.setImageDrawable(getDrawable(R.drawable.ic_thumb_up_outlined));
+        likeButton.setImageDrawable(getDrawable(R.drawable.ic_thumb_up_outlined_48dp));
         Toast.makeText(this, getString(R.string.removed_from_db), Toast.LENGTH_SHORT).show();
     }
 

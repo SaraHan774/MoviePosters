@@ -2,6 +2,8 @@ package com.gahee.movieposters;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,6 +11,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
 
 import com.gahee.movieposters.data.remote.RemoteViewModel;
 
@@ -22,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private RemoteViewModel remoteViewModel;
     private RecyclerView recyclerView;
     private MovieAdapter movieAdapter;
-
+    private Toolbar toolbar;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -33,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
         Intent appLinkIntent = getIntent();
         String appLinkAction = appLinkIntent.getAction();
         Uri appLinkData = appLinkIntent.getData();
+
+        toolbar = findViewById(R.id.main_toolbar);
+        toolbar.inflateMenu(R.menu.main_menu);
 
         recyclerView = findViewById(R.id.popular_movies_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -49,4 +55,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
 }

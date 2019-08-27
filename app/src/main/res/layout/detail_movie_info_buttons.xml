@@ -8,7 +8,7 @@
 
     <ImageButton
         android:id="@+id/detail_like_imagebtn"
-        android:src="@drawable/ic_thumb_up_outlined"
+        android:src="@drawable/ic_thumb_up_outlined_48dp"
         android:layout_weight="1"
         android:background="@color/transparent"
         android:layout_width="wrap_content"
@@ -16,7 +16,7 @@
 
 <!--    <ImageButton-->
 <!--        android:id="@+id/detail_dislike_imagebtn"-->
-<!--        android:src="@drawable/ic_thumb_down_outlined"-->
+<!--        android:src="@drawable/ic_thumb_down_outlined_48dp"-->
 <!--        android:layout_weight="1"-->
 <!--        android:background="@color/transparent"-->
 <!--        android:layout_width="wrap_content"-->
