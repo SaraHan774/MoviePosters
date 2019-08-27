@@ -7,24 +7,27 @@
     android:layout_height="wrap_content">
 
     <ImageButton
-        android:src="@drawable/ic_thumb_up_black_48dp"
+        android:id="@+id/detail_like_imagebtn"
+        android:src="@drawable/ic_thumb_up_outlined"
         android:layout_weight="1"
         android:background="@color/transparent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <ImageButton
-        android:src="@drawable/ic_thumb_down_black_48dp"
-        android:layout_weight="1"
-        android:background="@color/transparent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+<!--    <ImageButton-->
+<!--        android:id="@+id/detail_dislike_imagebtn"-->
+<!--        android:src="@drawable/ic_thumb_down_outlined"-->
+<!--        android:layout_weight="1"-->
+<!--        android:background="@color/transparent"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"/>-->
 
     <ImageButton
+        android:id="@+id/detail_share_imagebtn"
         android:src="@drawable/ic_share_black_48dp"
         android:layout_weight="1"
         android:background="@color/transparent"
         android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

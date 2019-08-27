@@ -1,12 +1,9 @@
-package com.gahee.movieposters.data;
+package com.gahee.movieposters.data.remote;
 
-import android.graphics.Movie;
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.gahee.movieposters.model.PopularMovie;
 import com.gahee.movieposters.model.PopularResponse;
 import com.gahee.movieposters.model.TrailerResponse;
 import com.gahee.movieposters.utils.Config;
@@ -89,7 +86,9 @@ public class MoviesClient {
             @Override
             public void onResponse(Call<TrailerResponse> call, Response<TrailerResponse> response) {
                 trailerResponseLiveData.setValue(response.body());
-                Log.d(RETROFIT_DEBUG, "trailers : " + response.body().getTrailers());
+                if (response.body() != null) {
+                    Log.d(RETROFIT_DEBUG, "trailers : " + response.body().getTrailers());
+                }
             }
 
             @Override

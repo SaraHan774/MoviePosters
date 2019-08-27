@@ -22,12 +22,14 @@
         <TextView
             android:id="@+id/detail_video_currentpagenum_textview"
             android:text="1"
+            android:textSize="@dimen/text_size_small"
             android:fontFamily="@font/raleway_lightitalic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <TextView
             android:text="/"
+            android:textSize="@dimen/text_size_small"
             android:fontFamily="@font/raleway_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -35,6 +37,7 @@
         <TextView
             android:id="@+id/detail_video_totalpagenum_textview"
             android:text="3"
+            android:textSize="@dimen/text_size_small"
             android:fontFamily="@font/raleway_lightitalic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -43,18 +46,19 @@
 
 
     <RelativeLayout
+        android:id="@+id/watch_video_click_area"
         android:layout_gravity="bottom"
         android:background="@drawable/detail_scrim_gradient"
         android:padding="@dimen/text_view_padding"
         android:layout_width="match_parent"
-        android:layout_height="90dp">
+        android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/video_name"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/text_size_x_medium"
         android:fontFamily="@font/raleway_semibold"
-        android:layout_marginTop="8dp"
+        android:layout_above="@id/video_site"
         android:text="@string/sample_short"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -73,13 +77,26 @@
         android:id="@+id/video_type"
         android:text="@string/sample_short"
         android:textColor="@color/colorWhite"
-        android:layout_toRightOf="@id/video_site"
+        android:layout_toEndOf="@id/video_site"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         android:layout_alignParentBottom="true"
         android:fontFamily="@font/raleway_semibolditalic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/video_click_to_watch"
+            android:text="@string/click_to_watch"
+            android:textColor="@color/colorWhite"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="@font/raleway_lightitalic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
     </RelativeLayout>
 

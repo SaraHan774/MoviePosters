@@ -1,4 +1,4 @@
-package com.gahee.movieposters.data;
+package com.gahee.movieposters.data.remote;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

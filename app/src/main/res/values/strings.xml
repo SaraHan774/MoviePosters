@@ -7,5 +7,8 @@
     <!-- Main View Holder TextViews-->
     <string name="checkout_details">Check out the details</string>
     <string name="trailers_amp_videos"><![CDATA[Trailers & Videos]]></string>
+    <string name="click_to_watch">Click to watch</string>
+    <string name="removed_from_db">Removed from your collections!</string>
+    <string name="saved_to_db">Saved to your collections!</string>
 
 </resources>

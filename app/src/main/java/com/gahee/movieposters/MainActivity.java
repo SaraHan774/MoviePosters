@@ -10,10 +10,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
-import com.gahee.movieposters.data.RemoteViewModel;
+import com.gahee.movieposters.data.remote.RemoteViewModel;
 import com.gahee.movieposters.model.PopularResponse;
 
 public class MainActivity extends AppCompatActivity {
@@ -45,14 +44,11 @@ public class MainActivity extends AppCompatActivity {
         remoteViewModel = new RemoteViewModel();
         remoteViewModel.fetchPopularMoviesFromRepo();
 
-        remoteViewModel.getPopularMovieResponseLiveDataFromRepo().observe(this, new Observer<PopularResponse>() {
-            @Override
-            public void onChanged(PopularResponse popularResponse) {
+        remoteViewModel.getPopularMovieResponseLiveDataFromRepo().observe(this, popularResponse -> {
 //                Log.d(VIEW_MODEL_DEBUG, "response : " + popularResponse.getResults().get(0).getTitle());
-                movieAdapter = new MovieAdapter(MainActivity.this, popularResponse.getResults());
-                recyclerView.setAdapter(movieAdapter);
-                recyclerView.setHasFixedSize(true);
-            }
+            movieAdapter = new MovieAdapter(MainActivity.this, popularResponse.getResults());
+            recyclerView.setAdapter(movieAdapter);
+            recyclerView.setHasFixedSize(true);
         });
     }
 

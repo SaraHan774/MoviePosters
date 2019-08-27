@@ -1,4 +1,4 @@
-package com.gahee.movieposters.data;
+package com.gahee.movieposters.data.remote;
 
 import android.os.AsyncTask;
 
@@ -37,7 +37,7 @@ public class RemoteRepo {
         return moviesClient.getTrailerResponseLiveData();
     }
 
-    class PopularMoviesAsync extends AsyncTask<Void, Void, Void> {
+    static class PopularMoviesAsync extends AsyncTask<Void, Void, Void> {
 
         MoviesClient moviesClient;
 
@@ -52,7 +52,7 @@ public class RemoteRepo {
         }
     }
 
-    class FetchTrailersAsync extends AsyncTask<String, Void, Void> {
+    static class FetchTrailersAsync extends AsyncTask<String, Void, Void> {
 
         MoviesClient moviesClient;
 

@@ -1,4 +1,4 @@
-package com.gahee.movieposters.data;
+package com.gahee.movieposters.data.remote;
 
 import com.gahee.movieposters.model.PopularResponse;
 import com.gahee.movieposters.model.TrailerResponse;

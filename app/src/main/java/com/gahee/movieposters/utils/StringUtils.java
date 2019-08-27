@@ -1,6 +1,8 @@
 package com.gahee.movieposters.utils;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 public class StringUtils {
 
@@ -9,6 +11,15 @@ public class StringUtils {
                     .append(videoId).append("/hqdefault.jpg");
         Log.d("videourls" ,  stringBuilder.toString());
         return stringBuilder.toString();
+    }
+
+    public static String getYoutubeWatchUrlFromIds(String videoId){
+        if(videoId != null || (videoId != null ? videoId.equals("") : false)){
+            return "http://www.youtube.com/watch?v=" + videoId;
+        }
+        else{
+            return "";
+        }
     }
 
 }

@@ -11,7 +11,7 @@
 
 <!-- Basic colors -->
     <color name="colorWhite">#ffffff</color>
-    <color name="colorTransparentWhite">#97FFFFFF</color>
+    <color name="colorTransparentWhite">#54FFFFFF</color>
     <color name="colorTransparent">#00FFFFFF</color>
     <color name="colorHalfTransparent">#20000000</color>
     <color name="colorTransparentBlack">#6F000000</color>
