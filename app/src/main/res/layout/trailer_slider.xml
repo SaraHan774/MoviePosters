@@ -22,6 +22,7 @@
         <TextView
             android:id="@+id/detail_video_currentpagenum_textview"
             android:text="1"
+            android:textColor="@color/colorWhite"
             android:textSize="@dimen/text_size_small"
             android:fontFamily="@font/raleway_lightitalic"
             android:layout_width="wrap_content"
@@ -29,6 +30,7 @@
 
         <TextView
             android:text="/"
+            android:textColor="@color/colorWhite"
             android:textSize="@dimen/text_size_small"
             android:fontFamily="@font/raleway_regular"
             android:layout_width="wrap_content"
@@ -37,6 +39,7 @@
         <TextView
             android:id="@+id/detail_video_totalpagenum_textview"
             android:text="3"
+            android:textColor="@color/colorWhite"
             android:textSize="@dimen/text_size_small"
             android:fontFamily="@font/raleway_lightitalic"
             android:layout_width="wrap_content"

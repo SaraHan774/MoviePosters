@@ -2,7 +2,6 @@ package com.gahee.movieposters;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,10 +9,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 
 import com.gahee.movieposters.data.remote.RemoteViewModel;
-import com.gahee.movieposters.model.PopularResponse;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,7 +49,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void onDetailClick(View view) {
-
-    }
 }

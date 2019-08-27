@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:paddingTop="16dp"
     android:layout_width="match_parent"
-    android:layout_height="176dp">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/detail_poster_imageview"
         android:layout_width="132dp"
         android:layout_height="match_parent"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="4dp"
         android:scaleType="fitCenter" />
@@ -21,6 +21,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:layout_toEndOf="@+id/detail_poster_imageview"
         android:fontFamily="@font/raleway_semibold"
@@ -45,13 +46,12 @@
         android:id="@+id/detail_vote_average_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/detail_ratingbar"
-        android:layout_below="@+id/detail_release_date_textview"
+        android:layout_below="@id/detail_release_date_textview"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:layout_toRightOf="@id/detail_poster_imageview"
         android:fontFamily="@font/raleway_semibold"
-        android:gravity="center"
+        android:gravity="center_horizontal"
         android:textColor="@color/colorAccent"
         android:text="7.1"
         android:textSize="@dimen/text_size_large" />
@@ -61,7 +61,7 @@
         style="@style/Widget.AppCompat.RatingBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/detail_vote_average_textview"
         android:layout_marginStart="48dp"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="8dp"
