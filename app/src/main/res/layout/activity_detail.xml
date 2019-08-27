@@ -76,6 +76,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
+            <include layout="@layout/trailer_viewpager"/>
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

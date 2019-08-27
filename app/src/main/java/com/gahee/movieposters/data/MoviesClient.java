@@ -89,6 +89,7 @@ public class MoviesClient {
             @Override
             public void onResponse(Call<TrailerResponse> call, Response<TrailerResponse> response) {
                 trailerResponseLiveData.setValue(response.body());
+                Log.d(RETROFIT_DEBUG, "trailers : " + response.body().getTrailers());
             }
 
             @Override

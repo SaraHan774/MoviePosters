@@ -6,5 +6,6 @@
 
     <!-- Main View Holder TextViews-->
     <string name="checkout_details">Check out the details</string>
+    <string name="trailers_amp_videos"><![CDATA[Trailers & Videos]]></string>
 
 </resources>

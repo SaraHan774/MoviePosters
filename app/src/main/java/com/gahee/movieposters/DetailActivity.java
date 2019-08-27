@@ -2,13 +2,13 @@ package com.gahee.movieposters;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatRatingBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -29,6 +29,8 @@ public class DetailActivity extends AppCompatActivity {
 
     private ImageView detailToolbarImageView;
     private PopularMovie popularMovie;
+    private ViewPager viewPager;
+    private TrailersPagerAdapter trailersPagerAdapter;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -43,12 +45,16 @@ public class DetailActivity extends AppCompatActivity {
         setUpToolbarImage();
         setUpDetailMovieInfo();
 
-        RemoteViewModel remoteViewModel = new RemoteViewModel();
+        RemoteViewModel remoteViewModel = ViewModelProviders.of(this).get(RemoteViewModel.class);
+
         remoteViewModel.fetchTrailersFromRepo(String.valueOf(popularMovie.getMovieId()));
         remoteViewModel.getTrailerLiveDataFromRepo().observe(this, new Observer<TrailerResponse>() {
             @Override
             public void onChanged(TrailerResponse trailerResponse) {
+                viewPager = findViewById(R.id.trailer_viewpager);
                 //send video key to view holder
+                trailersPagerAdapter = new TrailersPagerAdapter(DetailActivity.this, trailerResponse.getTrailers());
+                viewPager.setAdapter(trailersPagerAdapter);
             }
         });
     }
