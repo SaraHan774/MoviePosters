@@ -1,6 +1,7 @@
 package com.gahee.movieposters.data.remote;
 
 import com.gahee.movieposters.model.PopularResponse;
+import com.gahee.movieposters.model.ReviewResponse;
 import com.gahee.movieposters.model.TrailerResponse;
 
 import java.util.Map;
@@ -22,5 +23,10 @@ public interface MoviesService {
     Call<TrailerResponse> listTrailers(@Path("movie_id") String movieId
                                         , @Query("api_key") String api_key
                                             , @Query("language") String language);
+
+    @GET("movie/{movie_id}/reviews")
+    Call<ReviewResponse> listReviews(@Path("movie_id") String movieId,
+                                        @Query("api_key") String api_key,
+                                            @Query("language") String language);
 
 }

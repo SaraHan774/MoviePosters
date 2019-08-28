@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/review_view_holder_background"
+    android:layout_margin="8dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/detail_review_author_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/raleway_semibolditalic"
+        android:text="@string/sample_short"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/text_size_small"
+        app:layout_constraintBottom_toTopOf="@+id/detail_review_textview"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="8dp" />
+
+
+    <TextView
+        android:id="@+id/detail_review_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/raleway_lightitalic"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:text="@string/sample_medium"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/text_size_small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/review_clickformore_textview"
+        android:paddingStart="64dp"
+        android:paddingEnd="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/review_collapse_button_background"
+        android:text="More"
+        android:fontFamily="@font/raleway_semibold"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/movieAccent"
+        app:layout_constraintBottom_toBottomOf="@+id/detail_review_textview"
+        app:layout_constraintEnd_toEndOf="@+id/detail_review_textview" />
+
+    <TextView
+        android:id="@+id/review_clicktocollapse_textview"
+        android:paddingStart="64dp"
+        android:paddingEnd="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/review_collapse_button_background"
+        android:text="Less"
+        android:visibility="gone"
+        android:fontFamily="@font/raleway_semibold"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/movieAccent"
+        app:layout_constraintBottom_toBottomOf="@+id/detail_review_textview"
+        app:layout_constraintEnd_toEndOf="@+id/detail_review_textview" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

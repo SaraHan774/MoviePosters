@@ -4,7 +4,10 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
@@ -30,6 +33,7 @@ import com.gahee.movieposters.data.database.LikedMovie;
 import com.gahee.movieposters.data.database.MyRoomViewModel;
 import com.gahee.movieposters.data.remote.RemoteViewModel;
 import com.gahee.movieposters.model.PopularMovie;
+import com.gahee.movieposters.model.ReviewResponse;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -39,6 +43,7 @@ import static com.gahee.movieposters.utils.Constants.PARCEL_KEY;
 import static com.gahee.movieposters.utils.Constants.POSTER_BASE_URL;
 
 public class DetailActivity extends AppCompatActivity {
+
     private static final String TAG = "DetailActivity";
 
     private ImageView detailToolbarImageView;
@@ -47,10 +52,15 @@ public class DetailActivity extends AppCompatActivity {
     private TrailersPagerAdapter trailersPagerAdapter;
     private MyRoomViewModel myRoomViewModel;
 
+    //Image buttons
     private ImageButton likeButton;
     private ImageButton addCommentButton;
     private EditText commentEditText;
     private boolean isLiked = false;
+
+    //review section
+    RecyclerView reviewRecyclerView;
+    TextView tvReviewNumTitle;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -64,6 +74,10 @@ public class DetailActivity extends AppCompatActivity {
         likeButton = findViewById(R.id.detail_like_imagebtn);
         addCommentButton = findViewById(R.id.detail_myreview_imagebtn);
         commentEditText = new EditText(this);
+
+        //recycler view for review section
+        reviewRecyclerView = findViewById(R.id.detail_review_recyclerview);
+        tvReviewNumTitle = findViewById(R.id.reviews_title_textview);
 
         myRoomViewModel = ViewModelProviders.of(this).get(MyRoomViewModel.class);
         myRoomViewModel.getLikeMoviesLiveDataFromRepo().observe(this, likedMovies -> {
@@ -86,6 +100,23 @@ public class DetailActivity extends AppCompatActivity {
             trailersPagerAdapter = new TrailersPagerAdapter(DetailActivity.this, trailerResponse.getTrailers());
             viewPager.setAdapter(trailersPagerAdapter);
             viewPager.setPageMargin(32);
+        });
+
+        remoteViewModel.fetchReviewsFromRepo(String.valueOf(popularMovie.getMovieId()));
+        remoteViewModel.getReviewsLiveDataFromRepo().observe(this, new Observer<ReviewResponse>() {
+            @Override
+            public void onChanged(ReviewResponse reviewResponse) {
+                if(reviewResponse.getReviewList().size() != 0) {
+                    reviewRecyclerView.setHasFixedSize(true);
+                    reviewRecyclerView.setLayoutManager(new LinearLayoutManager(DetailActivity.this, LinearLayoutManager.HORIZONTAL, false));
+
+                    ReviewsAdapter reviewsAdapter = new ReviewsAdapter(DetailActivity.this, reviewResponse.getReviewList());
+                    reviewRecyclerView.setAdapter(reviewsAdapter);
+                    reviewsAdapter.notifyDataSetChanged();
+
+                    tvReviewNumTitle.setText(getString(R.string.reviews, reviewResponse.getReviewList().size()));
+                }
+            }
         });
 
     }
@@ -164,6 +195,7 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void insertMovieOnClick(PopularMovie popularMovie, View view){
         LikedMovie likedMovie = new LikedMovie(
                 popularMovie.getMovieId(),
@@ -176,14 +208,17 @@ public class DetailActivity extends AppCompatActivity {
         myRoomViewModel.insertLikedMovieViaViewModel(likedMovie);
 
         likeButton.setImageDrawable(getDrawable(R.drawable.ic_thumb_up_white_48dp));
-        Snackbar.make(view, getString(R.string.saved_to_db), Snackbar.LENGTH_LONG).show();
+        Snackbar.make(view, getString(R.string.saved_to_db), Snackbar.LENGTH_LONG)
+                .setBackgroundTint(getColor(R.color.matrixGrey)).show();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void deleteMovieOnClick(int movieId, View view){
         myRoomViewModel.deleteLikedMovieByIdViaViewModel(movieId);
 
         likeButton.setImageDrawable(getDrawable(R.drawable.ic_thumb_up_outlined_48dp));
-        Snackbar.make(view, getString(R.string.removed_from_db), Snackbar.LENGTH_LONG).show();
+        Snackbar.make(view, getString(R.string.removed_from_db), Snackbar.LENGTH_LONG)
+                .setBackgroundTint(getColor(R.color.matrixGrey)).show();
     }
 
     private boolean checkIfLikedMovie(PopularMovie popularMovie, List<LikedMovie> likedMovieList) {
@@ -191,7 +226,9 @@ public class DetailActivity extends AppCompatActivity {
             if (likedMovieList != null) {
                 for (LikedMovie likedMovie : likedMovieList) {
                     Log.d(TAG, "checkIfLikedMovie: " + likedMovie.getMovieId());
+
                     if (likedMovie.getMovieId() == popularMovie.getMovieId()) {
+
                         Log.d(TAG, "checkIfLikedMovie: " + popularMovie.getMovieId() + " is in the database");
                         return true;
                     }
@@ -242,4 +279,9 @@ public class DetailActivity extends AppCompatActivity {
 
         dialog.show();
     }
+
+    private void fetchMovieReviewsFromRemote(int movieId){
+        //implement method
+    }
+
 }

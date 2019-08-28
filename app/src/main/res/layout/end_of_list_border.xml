@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="120dp"
+        android:layout_height="1dp"
+        android:background="@color/matrixGrey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:fontFamily="@font/hammersmith_one_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="END OF THE LIST"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size_x_small"
+        android:textColor="@color/matrixGrey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="120dp"
+        android:layout_height="1dp"
+        android:background="@color/matrixGrey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

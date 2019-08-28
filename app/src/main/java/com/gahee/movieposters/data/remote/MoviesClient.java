@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 
 import com.gahee.movieposters.model.PopularResponse;
+import com.gahee.movieposters.model.ReviewResponse;
 import com.gahee.movieposters.model.TrailerResponse;
 import com.gahee.movieposters.utils.Config;
 
@@ -28,6 +29,7 @@ public class MoviesClient {
 
     private MutableLiveData<PopularResponse> popularMovieResponseLiveData = new MutableLiveData<>();
     private MutableLiveData<TrailerResponse> trailerResponseLiveData = new MutableLiveData<>();
+    private MutableLiveData<ReviewResponse> reviewResponseMutableLiveData = new MutableLiveData<>();
 
     private HashMap<String, String> queries = new HashMap<>();
     private static MoviesClient instance;
@@ -67,10 +69,6 @@ public class MoviesClient {
         return popularMovieResponseLiveData;
     }
 
-    public MutableLiveData<TrailerResponse> getTrailerResponseLiveData() {
-        return trailerResponseLiveData;
-    }
-
     private HashMap<String, String> appendQueries(){
         queries.put(KEY_LANGUAGE, EN);
         queries.put(KEY_SORT_BY, POPULARITY);
@@ -99,6 +97,30 @@ public class MoviesClient {
         trailerResponseCall.enqueue(callback);
     }
 
+    public MutableLiveData<TrailerResponse> getTrailerResponseLiveData() {
+        return trailerResponseLiveData;
+    }
 
+    public void fetchMovieReviews(String movieId){
+        final Call<ReviewResponse> reviewResponseCall
+                = moviesService.listReviews(movieId, Config.API_KEY, EN);
+        Callback<ReviewResponse> callback
+                = new Callback<ReviewResponse>() {
+            @Override
+            public void onResponse(Call<ReviewResponse> call, Response<ReviewResponse> response) {
+                Log.d(RETROFIT_DEBUG, "onResponse: reviews" + response.body());
+                reviewResponseMutableLiveData.setValue(response.body());
+            }
 
+            @Override
+            public void onFailure(Call<ReviewResponse> call, Throwable t) {
+                Log.d(TAG, "onFailure: reviews " + t.getMessage());
+            }
+        };
+        reviewResponseCall.enqueue(callback);
+    }
+
+    public MutableLiveData<ReviewResponse> getReviewResponseMutableLiveData() {
+        return reviewResponseMutableLiveData;
+    }
 }

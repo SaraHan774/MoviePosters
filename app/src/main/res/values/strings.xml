@@ -24,5 +24,6 @@
     <string name="canceled">Canceled</string>
     <string name="saved_comment">Successfully saved your comment</string>
     <string name="blank_comment">Blank Comment!</string>
+    <string name="reviews">%1$d Reviews</string>
 
 </resources>

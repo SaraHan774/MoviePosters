@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import androidx.lifecycle.MutableLiveData;
 
 import com.gahee.movieposters.model.PopularResponse;
+import com.gahee.movieposters.model.ReviewResponse;
 import com.gahee.movieposters.model.TrailerResponse;
 
 public class RemoteRepo {
@@ -29,12 +30,18 @@ public class RemoteRepo {
 
     public void fetchTrailersAsync(String movieId){new FetchTrailersAsync(moviesClient).execute(movieId);}
 
+    public void fetchReviewsAsync(String movieId){new FetchReviewsAsync(moviesClient).execute(movieId);}
+
     public MutableLiveData<PopularResponse> getPopularMovieResponseLiveDataFromClient(){
         return moviesClient.getPopularMovieResponseLiveData();
     }
 
     public MutableLiveData<TrailerResponse> getTrailerLiveDataFromClient(){
         return moviesClient.getTrailerResponseLiveData();
+    }
+
+    public MutableLiveData<ReviewResponse> getReviewLiveDataFromClient(){
+        return moviesClient.getReviewResponseMutableLiveData();
     }
 
     static class PopularMoviesAsync extends AsyncTask<Void, Void, Void> {
@@ -67,4 +74,17 @@ public class RemoteRepo {
         }
     }
 
+    static class FetchReviewsAsync extends AsyncTask<String, Void, Void>{
+        MoviesClient moviesClient;
+
+        private FetchReviewsAsync(MoviesClient m){
+            moviesClient = m;
+        }
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            moviesClient.fetchMovieReviews(strings[0]);
+            return null;
+        }
+    }
 }

@@ -16,6 +16,7 @@
         android:layout_margin="8dp" />
 
     <LinearLayout
+        android:id="@+id/main_card_info_container"
         android:layout_toEndOf="@id/main_poster_imageview"
         android:gravity="center"
         android:orientation="vertical"
@@ -32,6 +33,7 @@
             android:textSize="@dimen/text_size_small"
             android:layout_marginBottom="@dimen/main_movie_text_margin"
             android:text="@string/sample_short"
+            android:textAlignment="center"
             android:textColor="@color/colorBlack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -71,9 +73,18 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_above="@id/checkout_detail_box"
+        android:background="@color/colorHalfTransparent"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/checkout_detail_box"
         android:layout_below="@id/main_poster_imageview"
+        android:layout_marginTop="4dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
