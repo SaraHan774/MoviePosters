@@ -62,6 +62,8 @@ public class DetailActivity extends AppCompatActivity {
     RecyclerView reviewRecyclerView;
     TextView tvReviewNumTitle;
 
+    private RemoteViewModel remoteViewModel;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +80,8 @@ public class DetailActivity extends AppCompatActivity {
         //recycler view for review section
         reviewRecyclerView = findViewById(R.id.detail_review_recyclerview);
         tvReviewNumTitle = findViewById(R.id.reviews_title_textview);
+        reviewRecyclerView.setHasFixedSize(true);
+        reviewRecyclerView.setLayoutManager(new LinearLayoutManager(DetailActivity.this, LinearLayoutManager.HORIZONTAL, false));
 
         myRoomViewModel = ViewModelProviders.of(this).get(MyRoomViewModel.class);
         myRoomViewModel.getLikeMoviesLiveDataFromRepo().observe(this, likedMovies -> {
@@ -91,9 +95,10 @@ public class DetailActivity extends AppCompatActivity {
         setUpDetailMovieInfo();
         onClickImageButtons();
 
-        RemoteViewModel remoteViewModel = ViewModelProviders.of(this).get(RemoteViewModel.class);
-
+        remoteViewModel = ViewModelProviders.of(this).get(RemoteViewModel.class);
+        remoteViewModel.fetchReviewsFromRepo(String.valueOf(popularMovie.getMovieId()));
         remoteViewModel.fetchTrailersFromRepo(String.valueOf(popularMovie.getMovieId()));
+
         remoteViewModel.getTrailerLiveDataFromRepo().observe(this, trailerResponse -> {
             viewPager = findViewById(R.id.trailer_viewpager);
             //send video key to view holder
@@ -102,20 +107,19 @@ public class DetailActivity extends AppCompatActivity {
             viewPager.setPageMargin(32);
         });
 
-        remoteViewModel.fetchReviewsFromRepo(String.valueOf(popularMovie.getMovieId()));
-        remoteViewModel.getReviewsLiveDataFromRepo().observe(this, new Observer<ReviewResponse>() {
-            @Override
-            public void onChanged(ReviewResponse reviewResponse) {
-                if(reviewResponse.getReviewList().size() != 0) {
-                    reviewRecyclerView.setHasFixedSize(true);
-                    reviewRecyclerView.setLayoutManager(new LinearLayoutManager(DetailActivity.this, LinearLayoutManager.HORIZONTAL, false));
 
-                    ReviewsAdapter reviewsAdapter = new ReviewsAdapter(DetailActivity.this, reviewResponse.getReviewList());
-                    reviewRecyclerView.setAdapter(reviewsAdapter);
-                    reviewsAdapter.notifyDataSetChanged();
+        remoteViewModel.getReviewsLiveDataFromRepo().observe(this, reviewResponse -> {
 
-                    tvReviewNumTitle.setText(getString(R.string.reviews, reviewResponse.getReviewList().size()));
+            ReviewsAdapter reviewsAdapter = new ReviewsAdapter(DetailActivity.this, reviewResponse.getReviewList());
+            reviewRecyclerView.setAdapter(reviewsAdapter);
+
+            if(reviewResponse.getReviewList().size() != 0) {
+                if(tvReviewNumTitle.getVisibility() == View.GONE){
+                    tvReviewNumTitle.setVisibility(View.VISIBLE);
                 }
+                tvReviewNumTitle.setText(getString(R.string.reviews, reviewResponse.getReviewList().size()));
+            }else{
+                tvReviewNumTitle.setVisibility(View.GONE);
             }
         });
 
@@ -280,8 +284,5 @@ public class DetailActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void fetchMovieReviewsFromRemote(int movieId){
-        //implement method
-    }
 
 }

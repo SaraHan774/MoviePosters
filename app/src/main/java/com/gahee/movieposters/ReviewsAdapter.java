@@ -37,6 +37,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewsV
     @Override
     public void onBindViewHolder(@NonNull ReviewsViewHolder holder, int position) {
             Review review = reviewList.get(position);
+
             holder.tvReviewAuthor.setText(review.getAuthor());
             holder.tvReviewContent.setText(review.getContent());
             holder.tvReviewContent.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +48,10 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewsV
                     context.startActivity(intent);
                 }
             });
+
+            //TODO Change color of the review view holder background based on the sentiment analysis result score 
+
+
     }
 
     @Override
@@ -57,15 +62,17 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewsV
     class ReviewsViewHolder extends RecyclerView.ViewHolder {
         TextView tvReviewAuthor;
         TextView tvReviewContent;
-        TextView tvClickForMore;
-        TextView tvClickToCollapse;
+//        TextView tvClickForMore;
+//        TextView tvClickToCollapse;
 
         public ReviewsViewHolder(@NonNull View itemView) {
             super(itemView);
             tvReviewAuthor = itemView.findViewById(R.id.detail_review_author_textview);
             tvReviewContent = itemView.findViewById(R.id.detail_review_textview);
-            tvClickForMore = itemView.findViewById(R.id.review_clickformore_textview);
-            tvClickToCollapse = itemView.findViewById(R.id.review_clicktocollapse_textview);
+//            tvClickForMore = itemView.findViewById(R.id.review_clickformore_textview);
+//            tvClickToCollapse = itemView.findViewById(R.id.review_clicktocollapse_textview);
         }
     }
+
+
 }
