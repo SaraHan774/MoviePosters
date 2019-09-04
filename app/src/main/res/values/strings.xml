@@ -25,5 +25,6 @@
     <string name="saved_comment">Successfully saved your comment</string>
     <string name="blank_comment">Blank Comment!</string>
     <string name="reviews">%1$d Reviews</string>
+    <string name="one_review">1 Review</string>
 
 </resources>

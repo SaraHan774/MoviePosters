@@ -3,12 +3,15 @@ package com.gahee.movieposters;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gahee.movieposters.model.Review;
@@ -43,15 +46,19 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewsV
             holder.tvReviewContent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse(review.getReviewUrl()));
-                    context.startActivity(intent);
+
+                    FullScreenDialog dialogFragment = new FullScreenDialog();
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("review", review);
+                    dialogFragment.setArguments(bundle);
+
+                    FragmentTransaction fragmentTransaction
+                            = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
+                    dialogFragment.show(fragmentTransaction, FullScreenDialog.TAG);
                 }
             });
 
-            //TODO Change color of the review view holder background based on the sentiment analysis result score 
-
-
+            //TODO Change color of the review view holder background based on the sentiment analysis result score
     }
 
     @Override
@@ -62,15 +69,11 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewsV
     class ReviewsViewHolder extends RecyclerView.ViewHolder {
         TextView tvReviewAuthor;
         TextView tvReviewContent;
-//        TextView tvClickForMore;
-//        TextView tvClickToCollapse;
 
         public ReviewsViewHolder(@NonNull View itemView) {
             super(itemView);
             tvReviewAuthor = itemView.findViewById(R.id.detail_review_author_textview);
             tvReviewContent = itemView.findViewById(R.id.detail_review_textview);
-//            tvClickForMore = itemView.findViewById(R.id.review_clickformore_textview);
-//            tvClickToCollapse = itemView.findViewById(R.id.review_clicktocollapse_textview);
         }
     }
 

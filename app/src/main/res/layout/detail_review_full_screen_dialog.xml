@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_margin="32dp"
+    android:padding="16dp"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/dialog_review_author_textview"
+        android:textSize="@dimen/text_size_medium"
+        android:text="@string/sample_short"
+        android:textColor="@color/colorWhite"
+        android:fontFamily="@font/bangers_regular"
+        android:textStyle="italic"
+        android:layout_marginBottom="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/dialog_review_content_textview"
+        android:text="@string/sample_medium"
+        android:textSize="@dimen/text_size_small"
+        android:fontFamily="@font/raleway_semibold"
+        android:textColor="@color/colorWhite"
+        android:linksClickable="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    </ScrollView>
+
+</LinearLayout>

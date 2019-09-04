@@ -41,33 +41,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/review_clickformore_textview"-->
-<!--        android:paddingStart="64dp"-->
-<!--        android:paddingEnd="4dp"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@drawable/review_collapse_button_background"-->
-<!--        android:text="More"-->
-<!--        android:fontFamily="@font/raleway_semibold"-->
-<!--        android:textSize="@dimen/text_size_small"-->
-<!--        android:textColor="@color/movieAccent"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/detail_review_textview"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/detail_review_textview" />-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/review_clicktocollapse_textview"-->
-<!--        android:paddingStart="64dp"-->
-<!--        android:paddingEnd="4dp"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@drawable/review_collapse_button_background"-->
-<!--        android:text="Less"-->
-<!--        android:visibility="gone"-->
-<!--        android:fontFamily="@font/raleway_semibold"-->
-<!--        android:textSize="@dimen/text_size_small"-->
-<!--        android:textColor="@color/movieAccent"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/detail_review_textview"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/detail_review_textview" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

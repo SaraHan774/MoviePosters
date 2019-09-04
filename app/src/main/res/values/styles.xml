@@ -9,4 +9,16 @@
 
     </style>
 
+    <style name="FullScreenDialogStyle" parent="Theme.AppCompat.Dialog">
+        <item name="android:padding">
+            @dimen/dialog_padding
+        </item>
+
+        <item name="android:colorBackgroundFloating">
+            @color/transparent
+        </item>
+
+    </style>
+
+
 </resources>

@@ -117,7 +117,11 @@ public class DetailActivity extends AppCompatActivity {
                 if(tvReviewNumTitle.getVisibility() == View.GONE){
                     tvReviewNumTitle.setVisibility(View.VISIBLE);
                 }
-                tvReviewNumTitle.setText(getString(R.string.reviews, reviewResponse.getReviewList().size()));
+                if(reviewResponse.getReviewList().size() == 1){
+                    tvReviewNumTitle.setText(getString(R.string.one_review));
+                }else{
+                    tvReviewNumTitle.setText(getString(R.string.reviews, reviewResponse.getReviewList().size()));
+                }
             }else{
                 tvReviewNumTitle.setVisibility(View.GONE);
             }
