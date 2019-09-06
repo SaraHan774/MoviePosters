@@ -38,7 +38,7 @@ public class MyCollectionsActivity extends AppCompatActivity {
             }else{
                 emptyCollectionView.setVisibility(View.GONE);
                 myCollectionsAdapter = new MyCollectionsAdapter(MyCollectionsActivity.this, likedMovieList);
-                setUpRecyclerView(getItemTouchHelperCallback(likedMovieList, myCollectionsAdapter));
+                setUpRecyclerView(myRoomViewModel);
                 myCollectionsRecyclerView.setAdapter(myCollectionsAdapter);
             }
         });
@@ -51,36 +51,19 @@ public class MyCollectionsActivity extends AppCompatActivity {
     }
 
 
-    private void setUpRecyclerView(ItemTouchHelper.SimpleCallback simpleCallback){
+    private void setUpRecyclerView(MyRoomViewModel viewModel){
 
         myCollectionsRecyclerView = findViewById(R.id.my_collections_recyclerview);
         myCollectionsRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         myCollectionsRecyclerView.setLayoutManager(layoutManager);
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(
+                new SwipeToDeleteCallback(myCollectionsAdapter, viewModel)
+        );
         itemTouchHelper.attachToRecyclerView(myCollectionsRecyclerView);
     }
 
 
-    private ItemTouchHelper.SimpleCallback getItemTouchHelperCallback(List<LikedMovie> likedMovieList, MyCollectionsAdapter adapter){
-        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.DOWN | ItemTouchHelper.UP) {
 
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                Toast.makeText(MyCollectionsActivity.this, "on Move", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
-                Toast.makeText(MyCollectionsActivity.this, "on Swiped ", Toast.LENGTH_SHORT).show();
-                //Remove swiped item from list and notify the RecyclerView
-                int position = viewHolder.getAdapterPosition();
-                likedMovieList.remove(position);
-                adapter.notifyDataSetChanged();
-            }
-        };
-        return simpleItemTouchCallback;
-    }
 }

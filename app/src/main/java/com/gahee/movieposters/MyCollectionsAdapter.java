@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.gahee.movieposters.data.database.LikedMovie;
+import com.gahee.movieposters.data.database.MyRoomViewModel;
 
 import java.util.List;
 
@@ -58,6 +59,11 @@ public class MyCollectionsAdapter extends RecyclerView.Adapter<MyCollectionsAdap
     @Override
     public int getItemCount() {
         return likedMovieList != null ? likedMovieList.size() : 0;
+    }
+
+    public void deleteItem(int position, MyRoomViewModel myRoomViewModel){
+        LikedMovie likedMovieToBeDeleted = likedMovieList.get(position);
+        myRoomViewModel.deleteLikedMovieByIdViaViewModel(likedMovieToBeDeleted.getMovieId());
     }
 
     class MyCollectionsViewHolder extends RecyclerView.ViewHolder{
