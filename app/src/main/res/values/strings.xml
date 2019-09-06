@@ -26,5 +26,7 @@
     <string name="blank_comment">Blank Comment!</string>
     <string name="reviews">%1$d Reviews</string>
     <string name="one_review">1 Review</string>
+    <string name="share_msg">Let\'s watch \"%1$s\" together!</string>
+    <string name="share_movie_title">Share this movie</string>
 
 </resources>

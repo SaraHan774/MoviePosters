@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ShareCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -191,7 +192,16 @@ public class DetailActivity extends AppCompatActivity {
 
         ImageButton shareButton = findViewById(R.id.detail_share_imagebtn);
         shareButton.setOnClickListener(view -> {
+            ShareCompat.IntentBuilder intentBuilder = ShareCompat.IntentBuilder.from(this);
+            Intent intent = intentBuilder
+                    .setType("text/html")
+                    .setText(String.format(getString(R.string.share_msg), popularMovie.getTitle()))
+                    .setChooserTitle(getString(R.string.share_movie_title))
+                    .createChooserIntent();
 
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
         });
     }
 
